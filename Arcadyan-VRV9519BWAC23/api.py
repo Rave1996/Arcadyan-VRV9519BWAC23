@@ -17,7 +17,7 @@ class VRV9519BWAC23:
     def usr_signout(self):
         self.session.cookies.clear()
     
-    def getDevices(self):
+    def devices(self):
         devices = []
 
         # Validate session
@@ -41,7 +41,7 @@ class VRV9519BWAC23:
 
         return devices
 
-    def getLog(self):
+    def log(self):
         messages = []
 
         # Validate session

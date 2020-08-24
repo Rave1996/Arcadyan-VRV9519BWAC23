@@ -1,4 +1,5 @@
 import requests
+from bs4 import BeautifulSoup
 
 class VRV9519BWAC23:
     target = 'http://192.168.1.254'
@@ -11,7 +12,7 @@ class VRV9519BWAC23:
         self.session.post(url=f'{self.target}/cgi-bin/login.cgi', data={ 'pws': pwd })
     
     def usr_signed(self):
-        data = self.session.get(url=self.target + '/html/lan_device_table.stm').text.splitlines()
+        data = self.session.get(url=f'{self.target}/html/lan_device_table.stm').text.splitlines()
         return False if 'Alice' in data else True # Ty Alice <3
 
     def usr_signout(self):
@@ -24,7 +25,7 @@ class VRV9519BWAC23:
         if not self.usr_signed(): self.usr_signin()
 
         # Read devices
-        data = self.session.get(url=self.target + '/html/lan_device_table.stm').text.splitlines()
+        data = self.session.get(url=f'{self.target}/html/lan_device_table.stm').text.splitlines()
 
         # Filter data
         name, addr, mac, conn = None, None, None, None
